@@ -5,7 +5,7 @@ import user from '../src/app/models/User';
 
 const body = {
   nome: 'vitor',
-  email: 'vitor@gmail.com',
+  email: 'vitor1@gmail.com',
   senha: '12345678',
   telefones: [
     {
@@ -21,12 +21,12 @@ const body = {
 
 describe('Cadastro de usuario com sucesso', () => {
   beforeEach(async () => {
-    if (await user.countDocuments()) {
-      user.collection.drop();
+    if (await user.countDocuments({})) {
+      await user.collection.drop();
     }
   });
 
-  test('Deve cadastrar o usuario e retornar o token de autenticacao', async () => {
+  it('Deve cadastrar o usuario e retornar o token de autenticacao', async () => {
     const response = await request(app)
       .post('/signup')
       .send(body)
@@ -35,7 +35,7 @@ describe('Cadastro de usuario com sucesso', () => {
     expect(response.body).toHaveProperty('token');
   });
 
-  test('Deve cadatrar um usuario', async () => {
+  it('Deve cadatrar um usuario', async () => {
     const response = await request(app)
       .post('/signup')
       .send(body)

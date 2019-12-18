@@ -1,13 +1,13 @@
 import request from 'supertest';
 import app from '../src/app';
 
-describe('Sucesso ao buscar Usuario', async () => {
-  test('Deve retornar dados do usuario', async () => {
+describe('Sucesso ao buscar Usuario', () => {
+  it('Deve retornar dados do usuario', async () => {
     const responseUser = await request(app)
-      .post('/sign-up')
+      .post('/signup')
       .send({
         nome: 'Vitor',
-        email: 'vitor@gmail.com',
+        email: 'vitor2@gmail.com',
         senha: '12345678',
         telefones: [{ ddd: 11, numero: 961878675 }],
       });

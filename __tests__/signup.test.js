@@ -26,7 +26,7 @@ describe('Cadastro de usuario com sucesso', () => {
     }
   });
 
-  it('Deve cadastrar o usuario e retornar o token de autenticacao', async () => {
+  test('Deve cadastrar o usuario e retornar o token de autenticacao', async () => {
     const response = await request(app)
       .post('/signup')
       .send(body)
@@ -35,7 +35,7 @@ describe('Cadastro de usuario com sucesso', () => {
     expect(response.body).toHaveProperty('token');
   });
 
-  it('Deve cadatrar um usuario', async () => {
+  test('Deve cadatrar um usuario', async () => {
     const response = await request(app)
       .post('/signup')
       .send(body)
@@ -56,7 +56,7 @@ describe('Cadastro de usuario com sucesso', () => {
 });
 
 describe('Cadastro de usuario com falha', () => {
-  it('Deve retornar falha na validacao dos dados', async () => {
+  test('Deve retornar falha na validacao dos dados', async () => {
     const response = await request(app)
       .post('/signup')
       .send({

@@ -44,3 +44,18 @@ describe('Cadastro de usuario com sucesso', () => {
     expect(response.body).toHaveProperty('id');
   });
 });
+
+describe('Cadastro de usuario com falha', () => {
+  it('Deve retornar falha na validacao dos dados', async () => {
+    const response = await request(app)
+      .post('/signup')
+      .send({
+        nome: null,
+        email: 'vitor',
+        senha: null,
+      })
+      .expect(400);
+
+    expect(response.body).toHaveProperty('mensagem');
+  });
+});

@@ -41,7 +41,17 @@ describe('Cadastro de usuario com sucesso', () => {
       .send(body)
       .expect(200);
 
-    expect(response.body).toHaveProperty('id');
+    expect(response.body).toHaveProperty(
+      'id',
+      'nome',
+      'email',
+      'senha',
+      'telefones',
+      'data_criacao',
+      'data_atualizacao',
+      'ultimo_login',
+      'token'
+    );
   });
 });
 

@@ -1,9 +1,16 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import jwtConfig from '../../config/jwt';
+import SignInSchema from '../../validators/signin';
 
 class AuthController {
   async store(req, res) {
+    try {
+      await SignInSchema.validate(req.body);
+    } catch (error) {
+      return res.status(400).json({ mensagem: error.message });
+    }
+
     const { email, senha } = req.body;
 
     const user = await User.findOne({ email });

@@ -1,9 +1,16 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import jwtConfig from '../../config/jwt';
+import SignUpSchema from '../../validators/signup';
 
 class UserController {
   async store(req, res) {
+    try {
+      await SignUpSchema.validate(req.body);
+    } catch (error) {
+      return res.status(400).json({ mensagem: error.message });
+    }
+
     const { nome, email, senha, telefones } = req.body;
 
     const userExists = await User.findOne({ email });

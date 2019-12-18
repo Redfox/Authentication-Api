@@ -6,7 +6,7 @@ import user from '../src/app/models/User';
 const body = {
   nome: 'vitor',
   email: 'vitor@gmail.com',
-  senha: '123',
+  senha: '12345678',
   telefones: [
     {
       ddd: 11,

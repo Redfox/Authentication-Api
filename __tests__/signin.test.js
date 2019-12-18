@@ -24,3 +24,23 @@ describe('SignIn do usuario com sucesso', () => {
     expect(response.body).toHaveProperty('token');
   });
 });
+
+describe('SignIn do usuario com falha', () => {
+  test('Deve retornar falha na autorizacao', async () => {
+    const response = await request(app)
+      .post('/signin')
+      .send({ email: 'email@incorreto.com', senha: 'Incorreta' })
+      .expect(401);
+
+    expect(response.body).toHaveProperty('mensagem');
+  });
+
+  test('Deve  retornar falha nas validacoes dos dados', async () => {
+    const response = await request(app)
+      .post('/signin')
+      .send({ email: 'vitor', senha: '123' })
+      .expect(400);
+
+    expect(response.body).toHaveProperty('mensagem');
+  });
+});

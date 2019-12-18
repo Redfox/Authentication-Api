@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
+import UserController from './controllers/UserController';
+
 const routes = new Router();
 
-routes.post('/signup', (req, res) => {
-  return res.json({ ok: 'ok' });
-});
+routes.post('/signup', UserController.store);
 
 routes.get('/', (req, res) => {
   res.json({ mensagem: 'hello world' });

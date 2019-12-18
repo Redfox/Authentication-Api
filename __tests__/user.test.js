@@ -22,3 +22,14 @@ describe('Sucesso ao buscar Usuario', () => {
     expect(response.body).toHaveProperty('id');
   });
 });
+
+describe('Falha ao buscar usuario', () => {
+  it('Deve retornar falha na autorizacao', async () => {
+    const response = await request(app)
+      .get('/user')
+      .set('Authorization', `Bearer `)
+      .expect(401);
+
+    expect(response.body).toHaveProperty('mensagem');
+  });
+});

@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable func-names */
 import { Schema, model } from 'mongoose';
 
 const UserSchema = new Schema(
@@ -30,5 +32,19 @@ const UserSchema = new Schema(
     versionKey: false,
   }
 );
+
+UserSchema.methods.sanitize = function(token) {
+  const user = this.toObject();
+
+  return {
+    id: user._id,
+    nome: user.nome,
+    email: user.email,
+    telefones: user.telefones.forEach(telefone => delete telefone._id),
+    data_criacao: user.createdAt,
+    data_atualizacao: user.updatedAt,
+    token,
+  };
+};
 
 export default model('User', UserSchema);

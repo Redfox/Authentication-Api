@@ -4,6 +4,14 @@ import jwtConfig from '../../config/jwt';
 import SignUpSchema from '../../validators/signup';
 
 class UserController {
+  async show(req, res) {
+    const { userId: _id } = req;
+
+    const user = await User.findById({ _id });
+
+    return res.json(user.sanitize());
+  }
+
   async store(req, res) {
     try {
       await SignUpSchema.validate(req.body);

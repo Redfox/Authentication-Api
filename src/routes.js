@@ -12,8 +12,6 @@ routes.post('/signin', AuthController.store);
 
 routes.use(authMiddleware);
 
-routes.get('/', (req, res) => {
-  res.json({ mensagem: 'hello world' });
-});
+routes.get('/user', UserController.show);
 
 export default routes;

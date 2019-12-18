@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable func-names */
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new Schema(
   {
@@ -46,5 +47,13 @@ UserSchema.methods.sanitize = function(token) {
     token,
   };
 };
+
+UserSchema.pre('save', async function(next) {
+  if (this.senha) {
+    this.senha = await bcrypt.hash(this.senha, 8);
+  }
+
+  next();
+});
 
 export default model('User', UserSchema);

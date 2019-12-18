@@ -48,6 +48,10 @@ UserSchema.methods.sanitize = function(token) {
   };
 };
 
+UserSchema.methods.checkPassword = function(senha) {
+  return bcrypt.compare(senha, this.senha);
+};
+
 UserSchema.pre('save', async function(next) {
   if (this.senha) {
     this.senha = await bcrypt.hash(this.senha, 8);

@@ -10,9 +10,7 @@ const routes = new Router();
 routes.post('/signup', UserController.store);
 routes.post('/signin', AuthController.store);
 
-routes.use(authMiddleware);
-
-routes.get('/user', UserController.show);
+routes.get('/user', authMiddleware, UserController.show);
 
 routes.all('*', (req, res) => {
   res.status(404).json({ mensagem: 'Rota não encontrada' });

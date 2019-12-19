@@ -44,6 +44,7 @@ UserSchema.methods.sanitize = function(token) {
     telefones: user.telefones.forEach(telefone => delete telefone._id),
     data_criacao: user.createdAt,
     data_atualizacao: user.updatedAt,
+    ultimo_login: user.ultimo_login,
     token,
   };
 };

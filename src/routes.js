@@ -14,4 +14,8 @@ routes.use(authMiddleware);
 
 routes.get('/user', UserController.show);
 
+routes.all('*', (req, res) => {
+  res.status(404).json({ mensagem: 'Rota não encontrada' });
+});
+
 export default routes;
